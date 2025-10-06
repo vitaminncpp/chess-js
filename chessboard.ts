@@ -1,12 +1,22 @@
 import { Piece } from './pieces';
 import Config from './chess.config';
 import { Move } from './move';
+import { IBoard } from './chess.types';
 
 export class Chessboard {
   board: Tile[][] = [];
 
-  constructor() {
+  constructor(board?: IBoard) {
     this.board = [];
+
+    board?.forEach((rank, i) => {
+      this.board.push([]);
+      rank.forEach((_p, j) => {
+        if (_p) {
+          this.board[i].push(new Tile(Piece.create(_p)));
+        }
+      });
+    });
     for (let i = 0; i < Config.SQUARE_SIZE; i++) {
       this.board.push([]);
       for (let j = 0; j < Config.SQUARE_SIZE; j++) {
@@ -37,7 +47,7 @@ export class Chessboard {
 export class Tile {
   piece: Piece | null;
 
-  constructor() {
+  constructor(piece?: Piece) {
     this.piece = null;
   }
 }

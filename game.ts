@@ -4,7 +4,7 @@ import { State } from './state';
 import { Move } from './move';
 import Config from './chess.config';
 import { MoveType } from './games.enum';
-import { Board, PieceType } from './chess.types';
+import { IBoard, IType } from './chess.types';
 
 export class Game {
   board: Chessboard;
@@ -12,7 +12,7 @@ export class Game {
   playerB: Player;
   state: State = new State();
 
-  constructor() {
+  constructor(board?: IBoard) {
     this.board = new Chessboard();
     this.playerW = new Player(this.board, true);
     this.playerB = new Player(this.board, false);
@@ -45,18 +45,15 @@ export class Game {
     if (this.state.turn === color) {
       return this.board.board[x][y].piece!.getMoveMap();
     }
-    return Config.empty;
+    return Config.empty.map((_u) => _u.map((_v) => !!_v));
   }
 
-  loadBoard(board: Board) {
-  }
+  loadBoard(board: IBoard) {}
 
-  getPosition(): Board {
+  getPosition(): IBoard {
     return this.board.board.map((rank: Tile[]) =>
       rank.map((tile: Tile) =>
-        tile.piece
-          ? { color: tile.piece.getColor(), piece: tile.piece.getType() as PieceType }
-          : null,
+        tile.piece ? { color: tile.piece.getColor(), piece: tile.piece.getType() as IType } : null,
       ),
     );
   }

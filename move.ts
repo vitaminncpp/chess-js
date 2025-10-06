@@ -1,19 +1,19 @@
-import type { PiecePosition } from './chess.types';
+import type { IPosition } from './chess.types';
 import { MoveType } from './games.enum';
 
 export class Move {
-  xSrc: PiecePosition = -1;
-  ySrc: PiecePosition = -1;
-  xDest: PiecePosition = -1;
-  yDest: PiecePosition = -1;
+  xSrc: IPosition = -1;
+  ySrc: IPosition = -1;
+  xDest: IPosition = -1;
+  yDest: IPosition = -1;
 
   type: MoveType = MoveType.NOT_APPLICABLE;
   player: boolean = true;
 
   constructor(
     player: boolean,
-    src?: { x: PiecePosition; y: PiecePosition },
-    dest?: { x: PiecePosition; y: PiecePosition },
+    src?: { x: IPosition; y: IPosition },
+    dest?: { x: IPosition; y: IPosition },
   ) {
     this.player = player;
     this.init();
@@ -35,13 +35,13 @@ export class Move {
     this.yDest = -1;
   }
 
-  setSrc(x: PiecePosition, y: PiecePosition): boolean {
+  setSrc(x: IPosition, y: IPosition): boolean {
     this.xSrc = x;
     this.ySrc = y;
     return true;
   }
 
-  setDest(x: PiecePosition, y: PiecePosition) {
+  setDest(x: IPosition, y: IPosition) {
     this.xDest = x;
     this.yDest = y;
     return true;

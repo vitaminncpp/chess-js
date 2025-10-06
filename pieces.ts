@@ -1,26 +1,26 @@
 import { Chessboard } from './chessboard';
 import { Player } from './players';
-import type { PiecePosition, PieceType, PieceValue } from './chess.types';
+import type { IPiece, IPosition, IType, IValue } from './chess.types';
 import Config from './chess.config';
 import { Move } from './move';
 import { MoveType } from './games.enum';
 
 export abstract class Piece {
-  protected x: PiecePosition = -1;
-  protected y: PiecePosition = -1;
+  protected x: IPosition = -1;
+  protected y: IPosition = -1;
   protected player!: Player;
   protected color: boolean;
-  protected value: PieceValue = 0;
-  protected type: PieceType = -1;
+  protected value: IValue = 0;
+  protected type: IType = -1;
   protected legaMoves = 0;
-  protected index: PiecePosition = -1;
+  protected index: IPosition = -1;
   protected moveMap: boolean[][] = [];
   protected attackMap: boolean[][] = [];
   protected moved = false;
   protected alive = true;
   protected board: Chessboard;
 
-  constructor(board: Chessboard, x: PiecePosition, y: PiecePosition, color: boolean) {
+  constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     this.board = board;
     this.x = x;
     this.y = y;
@@ -75,7 +75,7 @@ export abstract class Piece {
     return this.color;
   }
 
-  getType(): PieceType {
+  getType(): IType {
     return this.type;
   }
 
@@ -86,14 +86,14 @@ export abstract class Piece {
     return this.alive;
   }
 
-  giveLife(i: PiecePosition, j: PiecePosition): boolean {
+  giveLife(i: IPosition, j: IPosition): boolean {
     this.x = i;
     this.y = j;
     this.alive = true;
     return this.alive;
   }
 
-  moveTo(x: PiecePosition, y: PiecePosition): Move {
+  moveTo(x: IPosition, y: IPosition): Move {
     this.x = x;
     this.y = y;
     const move = new Move(this.color);
@@ -102,7 +102,7 @@ export abstract class Piece {
     return move;
   }
 
-  testForMoveMap(x: PiecePosition, y: PiecePosition): boolean {
+  testForMoveMap(x: IPosition, y: IPosition): boolean {
     return false;
   }
 
@@ -127,10 +127,31 @@ export abstract class Piece {
   getAttackMap(): boolean[][] {
     return this.attackMap;
   }
+
+  static create(_p: IPiece) {
+    switch (_p.piece) {
+      case -1:
+        break;
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        break;
+      case 5:
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 export class Pawn extends Piece {
-  constructor(board: Chessboard, x: PiecePosition, y: PiecePosition, color: boolean) {
+  constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     super(board, x, y, color);
     this.value = Config.PAWN_VALUE;
     this.type = Config.PAWN_TYPE;
@@ -197,7 +218,7 @@ export class Pawn extends Piece {
 }
 
 export class Knight extends Piece {
-  constructor(board: Chessboard, x: PiecePosition, y: PiecePosition, color: boolean) {
+  constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     super(board, x, y, color);
     this.value = Config.KNIGHT_VALUE;
     this.type = Config.KNIGHT_TYPE;
@@ -277,15 +298,15 @@ export class Knight extends Piece {
 }
 
 export class Bishop extends Piece {
-  constructor(board: Chessboard, x: PiecePosition, y: PiecePosition, color: boolean) {
+  constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     super(board, x, y, color);
     this.value = Config.BISHOP_VALUE;
     this.type = Config.BISHOP_TYPE;
   }
 
   updateMoveMap(): boolean {
-    let i: PiecePosition = (this.x + 1) as PiecePosition;
-    let j: PiecePosition = (this.y + 1) as PiecePosition;
+    let i: IPosition = (this.x + 1) as IPosition;
+    let j: IPosition = (this.y + 1) as IPosition;
     while (i < Config.SQUARE_SIZE && j < Config.SQUARE_SIZE) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
@@ -353,15 +374,15 @@ export class Bishop extends Piece {
 }
 
 export class Rook extends Piece {
-  constructor(board: Chessboard, x: PiecePosition, y: PiecePosition, color: boolean) {
+  constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     super(board, x, y, color);
     this.value = Config.ROOK_VALUE;
     this.type = Config.ROOK_TYPE;
   }
 
   updateMoveMap(): boolean {
-    let i: PiecePosition = (this.x + 1) as PiecePosition;
-    let j: PiecePosition = this.y;
+    let i: IPosition = (this.x + 1) as IPosition;
+    let j: IPosition = this.y;
     while (i < Config.SQUARE_SIZE) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
@@ -421,15 +442,15 @@ export class Rook extends Piece {
 }
 
 export class Queen extends Piece {
-  constructor(board: Chessboard, x: PiecePosition, y: PiecePosition, color: boolean) {
+  constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     super(board, x, y, color);
     this.value = Config.QUEEN_VALUE;
     this.type = Config.QUEEN_TYPE;
   }
 
   updateMoveMap(): boolean {
-    let i: PiecePosition = (this.x + 1) as PiecePosition;
-    let j: PiecePosition = (this.y + 1) as PiecePosition;
+    let i: IPosition = (this.x + 1) as IPosition;
+    let j: IPosition = (this.y + 1) as IPosition;
     while (i < Config.SQUARE_SIZE && j < Config.SQUARE_SIZE) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
@@ -553,7 +574,7 @@ export class Queen extends Piece {
 export class King extends Piece {
   check: boolean = false;
 
-  constructor(board: Chessboard, x: PiecePosition, y: PiecePosition, color: boolean) {
+  constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     super(board, x, y, color);
     this.value = Config.KING_VALUE;
     this.type = Config.KING_TYPE;
