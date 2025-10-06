@@ -32,10 +32,10 @@ export abstract class Piece {
   init() {
     this.moveMap = [];
     this.attackMap = [];
-    for (let i = 0; i < Config.SQUARE_SIZE; i++) {
+    for (let i = 0; i < Config.BOARD.SIZE; i++) {
       this.moveMap.push([]);
       this.attackMap.push([]);
-      for (let j = 0; j < Config.SQUARE_SIZE; j++) {
+      for (let j = 0; j < Config.BOARD.SIZE; j++) {
         this.moveMap[i].push(false);
         this.attackMap[i].push(false);
       }
@@ -55,7 +55,7 @@ export abstract class Piece {
 
   resetMoveMap(): boolean {
     this.moveMap.forEach((rank) => {
-      for (let i = 0; i < Config.SQUARE_SIZE; i++) {
+      for (let i = 0; i < Config.BOARD.SIZE; i++) {
         rank[i] = false;
       }
     });
@@ -64,7 +64,7 @@ export abstract class Piece {
 
   resetAttackMap(): boolean {
     this.attackMap.forEach((rank) => {
-      for (let i = 0; i < Config.SQUARE_SIZE; i++) {
+      for (let i = 0; i < Config.BOARD.SIZE; i++) {
         rank[i] = false;
       }
     });
@@ -153,8 +153,8 @@ export abstract class Piece {
 export class Pawn extends Piece {
   constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     super(board, x, y, color);
-    this.value = Config.PAWN_VALUE;
-    this.type = Config.PAWN_TYPE;
+    this.value = Config.PIECE.PAWN.value;
+    this.type = Config.PIECE.PAWN.type;
   }
 
   updateMoveMap(): boolean {
@@ -166,7 +166,7 @@ export class Pawn extends Piece {
             this.moveMap[this.x + 2][this.y] = true;
           }
         }
-        if (this.y + 1 < Config.SQUARE_SIZE) {
+        if (this.y + 1 < Config.BOARD.SIZE) {
           if (
             this.board.board[this.x + 1][this.y + 1].piece &&
             !this.board.board[this.x + 1][this.y + 1].piece!.getColor()
@@ -191,7 +191,7 @@ export class Pawn extends Piece {
             this.moveMap[this.x - 2][this.y] = true;
           }
         }
-        if (this.y + 1 < Config.SQUARE_SIZE) {
+        if (this.y + 1 < Config.BOARD.SIZE) {
           if (
             this.board.board[this.x - 1][this.y + 1].piece &&
             this.board.board[this.x - 1][this.y + 1].piece!.getColor()
@@ -220,12 +220,12 @@ export class Pawn extends Piece {
 export class Knight extends Piece {
   constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     super(board, x, y, color);
-    this.value = Config.KNIGHT_VALUE;
-    this.type = Config.KNIGHT_TYPE;
+    this.value = Config.PIECE.KNIGHT.value;
+    this.type = Config.PIECE.KNIGHT.type;
   }
 
   updateMoveMap(): boolean {
-    if (this.x + 2 < Config.SQUARE_SIZE && this.y + 1 < Config.SQUARE_SIZE) {
+    if (this.x + 2 < Config.BOARD.SIZE && this.y + 1 < Config.BOARD.SIZE) {
       if (
         !this.board.board[this.x + 2][this.y + 1].piece ||
         this.board.board[this.x + 2][this.y + 1].piece!.getColor() !== this.color
@@ -233,7 +233,7 @@ export class Knight extends Piece {
         this.moveMap[this.x + 2][this.y + 1] = true;
       }
     }
-    if (this.x + 2 < Config.SQUARE_SIZE && this.y - 1 >= 0) {
+    if (this.x + 2 < Config.BOARD.SIZE && this.y - 1 >= 0) {
       if (
         !this.board.board[this.x + 2][this.y - 1].piece ||
         this.board.board[this.x + 2][this.y - 1].piece!.getColor() !== this.color
@@ -241,7 +241,7 @@ export class Knight extends Piece {
         this.moveMap[this.x + 2][this.y - 1] = true;
       }
     }
-    if (this.x - 2 >= 0 && this.y + 1 < Config.SQUARE_SIZE) {
+    if (this.x - 2 >= 0 && this.y + 1 < Config.BOARD.SIZE) {
       if (
         !this.board.board[this.x - 2][this.y + 1].piece ||
         this.board.board[this.x - 2][this.y + 1].piece!.getColor() !== this.color
@@ -257,7 +257,7 @@ export class Knight extends Piece {
         this.moveMap[this.x - 2][this.y - 1] = true;
       }
     }
-    if (this.x + 1 < Config.SQUARE_SIZE && this.y + 2 < Config.SQUARE_SIZE) {
+    if (this.x + 1 < Config.BOARD.SIZE && this.y + 2 < Config.BOARD.SIZE) {
       if (
         !this.board.board[this.x + 1][this.y + 2].piece ||
         this.board.board[this.x + 1][this.y + 2].piece!.getColor() !== this.color
@@ -265,7 +265,7 @@ export class Knight extends Piece {
         this.moveMap[this.x + 1][this.y + 2] = true;
       }
     }
-    if (this.x + 1 < Config.SQUARE_SIZE && this.y - 2 >= 0) {
+    if (this.x + 1 < Config.BOARD.SIZE && this.y - 2 >= 0) {
       if (
         !this.board.board[this.x + 1][this.y - 2].piece ||
         this.board.board[this.x + 1][this.y - 2].piece!.getColor() !== this.color
@@ -273,7 +273,7 @@ export class Knight extends Piece {
         this.moveMap[this.x + 1][this.y - 2] = true;
       }
     }
-    if (this.x - 1 >= 0 && this.y + 2 < Config.SQUARE_SIZE) {
+    if (this.x - 1 >= 0 && this.y + 2 < Config.BOARD.SIZE) {
       if (
         !this.board.board[this.x - 1][this.y + 2].piece ||
         this.board.board[this.x - 1][this.y + 2].piece!.getColor() !== this.color
@@ -300,14 +300,14 @@ export class Knight extends Piece {
 export class Bishop extends Piece {
   constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     super(board, x, y, color);
-    this.value = Config.BISHOP_VALUE;
-    this.type = Config.BISHOP_TYPE;
+    this.value = Config.PIECE.BISHOP.value;
+    this.type = Config.PIECE.BISHOP.type;
   }
 
   updateMoveMap(): boolean {
     let i: IPosition = (this.x + 1) as IPosition;
     let j: IPosition = (this.y + 1) as IPosition;
-    while (i < Config.SQUARE_SIZE && j < Config.SQUARE_SIZE) {
+    while (i < Config.BOARD.SIZE && j < Config.BOARD.SIZE) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
       } else {
@@ -322,7 +322,7 @@ export class Bishop extends Piece {
 
     i = this.x + 1;
     j = this.y - 1;
-    while (i < Config.SQUARE_SIZE && j >= 0) {
+    while (i < Config.BOARD.SIZE && j >= 0) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
       } else {
@@ -337,7 +337,7 @@ export class Bishop extends Piece {
 
     i = this.x - 1;
     j = this.y + 1;
-    while (i >= 0 && j < Config.SQUARE_SIZE) {
+    while (i >= 0 && j < Config.BOARD.SIZE) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
       } else {
@@ -376,14 +376,14 @@ export class Bishop extends Piece {
 export class Rook extends Piece {
   constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     super(board, x, y, color);
-    this.value = Config.ROOK_VALUE;
-    this.type = Config.ROOK_TYPE;
+    this.value = Config.PIECE.ROOK.value;
+    this.type = Config.PIECE.ROOK.type;
   }
 
   updateMoveMap(): boolean {
     let i: IPosition = (this.x + 1) as IPosition;
     let j: IPosition = this.y;
-    while (i < Config.SQUARE_SIZE) {
+    while (i < Config.BOARD.SIZE) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
       } else {
@@ -409,7 +409,7 @@ export class Rook extends Piece {
     }
     i = this.x;
     j = this.y + 1;
-    while (j < Config.SQUARE_SIZE) {
+    while (j < Config.BOARD.SIZE) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
       } else {
@@ -444,14 +444,14 @@ export class Rook extends Piece {
 export class Queen extends Piece {
   constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     super(board, x, y, color);
-    this.value = Config.QUEEN_VALUE;
-    this.type = Config.QUEEN_TYPE;
+    this.value = Config.PIECE.QUEEN.value;
+    this.type = Config.PIECE.QUEEN.type;
   }
 
   updateMoveMap(): boolean {
     let i: IPosition = (this.x + 1) as IPosition;
     let j: IPosition = (this.y + 1) as IPosition;
-    while (i < Config.SQUARE_SIZE && j < Config.SQUARE_SIZE) {
+    while (i < Config.BOARD.SIZE && j < Config.BOARD.SIZE) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
       } else {
@@ -466,7 +466,7 @@ export class Queen extends Piece {
 
     i = this.x + 1;
     j = this.y - 1;
-    while (i < Config.SQUARE_SIZE && j >= 0) {
+    while (i < Config.BOARD.SIZE && j >= 0) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
       } else {
@@ -481,7 +481,7 @@ export class Queen extends Piece {
 
     i = this.x - 1;
     j = this.y + 1;
-    while (i >= 0 && j < Config.SQUARE_SIZE) {
+    while (i >= 0 && j < Config.BOARD.SIZE) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
       } else {
@@ -510,7 +510,7 @@ export class Queen extends Piece {
 
     i = this.x + 1;
     j = this.y;
-    while (i < Config.SQUARE_SIZE) {
+    while (i < Config.BOARD.SIZE) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
       } else {
@@ -538,7 +538,7 @@ export class Queen extends Piece {
 
     i = this.x;
     j = this.y + 1;
-    while (j < Config.SQUARE_SIZE) {
+    while (j < Config.BOARD.SIZE) {
       if (!this.board.board[i][j].piece) {
         this.moveMap[i][j] = true;
       } else {
@@ -576,8 +576,8 @@ export class King extends Piece {
 
   constructor(board: Chessboard, x: IPosition, y: IPosition, color: boolean) {
     super(board, x, y, color);
-    this.value = Config.KING_VALUE;
-    this.type = Config.KING_TYPE;
+    this.value = Config.PIECE.KING.value;
+    this.type = Config.PIECE.KING.type;
     this.check = false;
   }
 
@@ -590,7 +590,7 @@ export class King extends Piece {
         this.moveMap[this.x - 1][this.y] = true;
       }
     }
-    if (this.x + 1 < Config.SQUARE_SIZE) {
+    if (this.x + 1 < Config.BOARD.SIZE) {
       if (
         !this.board.board[this.x + 1][this.y].piece ||
         this.board.board[this.x + 1][this.y].piece!.getColor() !== this.color
@@ -606,7 +606,7 @@ export class King extends Piece {
         this.moveMap[this.x][this.y - 1] = true;
       }
     }
-    if (this.y + 1 < Config.SQUARE_SIZE) {
+    if (this.y + 1 < Config.BOARD.SIZE) {
       if (
         !this.board.board[this.x][this.y + 1].piece ||
         this.board.board[this.x][this.y + 1].piece!.getColor() !== this.color
@@ -623,7 +623,7 @@ export class King extends Piece {
         this.moveMap[this.x - 1][this.y - 1] = true;
       }
     }
-    if (this.x - 1 >= 0 && this.y + 1 < Config.SQUARE_SIZE) {
+    if (this.x - 1 >= 0 && this.y + 1 < Config.BOARD.SIZE) {
       if (
         !this.board.board[this.x - 1][this.y + 1].piece ||
         this.board.board[this.x - 1][this.y + 1].piece!.getColor() !== this.color
@@ -631,7 +631,7 @@ export class King extends Piece {
         this.moveMap[this.x - 1][this.y + 1] = true;
       }
     }
-    if (this.x + 1 < Config.SQUARE_SIZE && this.y - 1 >= 0) {
+    if (this.x + 1 < Config.BOARD.SIZE && this.y - 1 >= 0) {
       if (
         !this.board.board[this.x + 1][this.y - 1].piece ||
         this.board.board[this.x + 1][this.y - 1].piece!.getColor() !== this.color
@@ -639,7 +639,7 @@ export class King extends Piece {
         this.moveMap[this.x + 1][this.y - 1] = true;
       }
     }
-    if (this.x + 1 < Config.SQUARE_SIZE && this.y + 1 < Config.SQUARE_SIZE) {
+    if (this.x + 1 < Config.BOARD.SIZE && this.y + 1 < Config.BOARD.SIZE) {
       if (
         !this.board.board[this.x + 1][this.y + 1].piece ||
         this.board.board[this.x + 1][this.y + 1].piece!.getColor() !== this.color
@@ -654,26 +654,26 @@ export class King extends Piece {
     if (this.x - 1 >= 0) {
       this.attackMap[this.x - 1][this.y] = true;
     }
-    if (this.x + 1 < Config.SQUARE_SIZE) {
+    if (this.x + 1 < Config.BOARD.SIZE) {
       this.attackMap[this.x + 1][this.y] = true;
     }
     if (this.y - 1 >= 0) {
       this.attackMap[this.x][this.y - 1] = true;
     }
-    if (this.y + 1 < Config.SQUARE_SIZE) {
+    if (this.y + 1 < Config.BOARD.SIZE) {
       this.attackMap[this.x][this.y + 1] = true;
     }
 
     if (this.x - 1 >= 0 && this.y - 1 >= 0) {
       this.attackMap[this.x - 1][this.y - 1] = true;
     }
-    if (this.x - 1 >= 0 && this.y + 1 < Config.SQUARE_SIZE) {
+    if (this.x - 1 >= 0 && this.y + 1 < Config.BOARD.SIZE) {
       this.attackMap[this.x - 1][this.y + 1] = true;
     }
-    if (this.x + 1 < Config.SQUARE_SIZE && this.y - 1 >= 0) {
+    if (this.x + 1 < Config.BOARD.SIZE && this.y - 1 >= 0) {
       this.attackMap[this.x + 1][this.y - 1] = true;
     }
-    if (this.x + 1 < Config.SQUARE_SIZE && this.y + 1 < Config.SQUARE_SIZE) {
+    if (this.x + 1 < Config.BOARD.SIZE && this.y + 1 < Config.BOARD.SIZE) {
       this.attackMap[this.x + 1][this.y + 1] = true;
     }
     return true;

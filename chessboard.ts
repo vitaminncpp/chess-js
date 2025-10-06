@@ -13,13 +13,14 @@ export class Chessboard {
       this.board.push([]);
       rank.forEach((_p, j) => {
         if (_p) {
-          this.board[i].push(new Tile(Piece.create(_p)));
+          // this.board[i].push(new Tile(Piece.create(_p)));
+          this.board[i].push(new Tile());
         }
       });
     });
-    for (let i = 0; i < Config.SQUARE_SIZE; i++) {
+    for (let i = 0; i < Config.BOARD.SIZE; i++) {
       this.board.push([]);
-      for (let j = 0; j < Config.SQUARE_SIZE; j++) {
+      for (let j = 0; j < Config.BOARD.SIZE; j++) {
         this.board[i].push(new Tile());
       }
     }

@@ -6,6 +6,6 @@ export interface IPiece {
   color: boolean;
   piece: IType;
   r?: IPosition;
-  f?: 'a' | 'b' | 'c' | 'd' | 'e' | 'f';
+  f?: 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h';
 }
 export type IBoard = Array<Array<IPiece | null>>;

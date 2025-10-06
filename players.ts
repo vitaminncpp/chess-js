@@ -31,7 +31,7 @@ export class Player {
     });
 
     // const pawns: Piece[] = [];
-    // for (let i = 0; i < Config.SQUARE_SIZE; i++) {
+    // for (let i = 0; i < Config.BOARD_SIZE; i++) {
     //   pawns.push(new Pawn(this.board, this.color ? 1 : 6, i as IPosition, this.color));
     // }
     // this.pieces.push(pawns);
