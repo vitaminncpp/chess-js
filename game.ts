@@ -1,10 +1,10 @@
-import { Chessboard } from './chessboard';
+import { Chessboard, Tile } from './chessboard';
 import { Player } from './players';
 import { State } from './state';
 import { Move } from './move';
 import Config from './chess.config';
 import { MoveType } from './games.enum';
-import { Board } from './chess.types';
+import { Board, PieceType } from './chess.types';
 
 export class Game {
   board: Chessboard;
@@ -47,5 +47,17 @@ export class Game {
     }
     return Config.empty;
   }
-  loadBoard(board: Board) {}
+
+  loadBoard(board: Board) {
+  }
+
+  getPosition(): Board {
+    return this.board.board.map((rank: Tile[]) =>
+      rank.map((tile: Tile) =>
+        tile.piece
+          ? { color: tile.piece.getColor(), piece: tile.piece.getType() as PieceType }
+          : null,
+      ),
+    );
+  }
 }
