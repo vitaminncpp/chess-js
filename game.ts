@@ -1,10 +1,10 @@
-import { Chessboard, Tile } from './chessboard';
+import { Chessboard } from './chessboard';
 import { Player } from './players';
 import { State } from './state';
 import { Move } from './move';
 import Config from './chess.config';
 import { MoveType, PLAYER } from './games.enum';
-import { IBoard, IType } from './chess.types';
+import { IBoard } from './chess.types';
 
 export class Game {
   board: Chessboard;
@@ -32,10 +32,15 @@ export class Game {
 
   move(move: Move): Move {
     if (this.state.turn === move.player) {
-      const ret: Move = this.board.move(move);
-      this.update();
-      this.state.turn = !this.state.turn;
-      return ret;
+      const moveMap = this.getMoveMapFor(move.xSrc, move.ySrc, move.player);
+      if (moveMap[move.xDest][move.yDest]) {
+        const moved: Move = this.board.move(move);
+        this.state.turn = !this.state.turn;
+        this.update();
+        return moved;
+      }
+      move.type = MoveType.ILLEGAL_MOVE;
+      return move;
     }
     move.type = MoveType.WRONG_PLAYER;
     return move;
