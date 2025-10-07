@@ -1,5 +1,5 @@
-import { FILE } from './games.enum';
-import { IBoard, IType } from './chess.types';
+import { FILE } from "./games.enum";
+import { IBoard, IType } from "./chess.types";
 
 export const COLOR = { WHITE: true, BLACK: false } as const;
 export const PIECE = {
@@ -27,7 +27,7 @@ const Config = {
   BOARD,
   INITIAL_POS: createInitialPosition(),
   fileToIndex: (file: FILE) => FILES.indexOf(file),
-  indexToFile: (i: number) => FILES[i],
+  indexToFile: (i: number) => FILES[i] as FILE,
 };
 
 function createInitialPosition(): IBoard {
