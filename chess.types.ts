@@ -1,6 +1,6 @@
 export type IPosition = -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
-export type IType = -1 | 0 | 1 | 2 | 3 | 4 | 5;
-export type IValue = 0 | 1 | 3 | 5 | 9 | 10000;
+export type IType = -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6;
+export type IValue = -1 | 0 | 1 | 3 | 5 | 9 | 10000;
 
 export interface IPiece {
   color: boolean;

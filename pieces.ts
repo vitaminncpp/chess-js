@@ -128,24 +128,25 @@ export abstract class Piece {
     return this.attackMap;
   }
 
-  static create(_p: IPiece) {
+  static create(_p: IPiece, board: Chessboard, i: IPosition, j: IPosition): Piece | null {
     switch (_p.piece) {
-      case -1:
-        break;
-      case 0:
-        break;
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
-        break;
-      case 5:
-        break;
+      case Config.PIECE.INVALID.type:
+      case Config.PIECE.EMPTY.type:
+        return null;
+      case Config.PIECE.PAWN.type:
+        return new Pawn(board, i, j, _p.color);
+      case Config.PIECE.KNIGHT.type:
+        return new Knight(board, i, j, _p.color);
+      case Config.PIECE.BISHOP.type:
+        return new Bishop(board, i, j, _p.color);
+      case Config.PIECE.ROOK.type:
+        return new Rook(board, i, j, _p.color);
+      case Config.PIECE.QUEEN.type:
+        return new Pawn(board, i, j, _p.color);
+      case Config.PIECE.KING.type:
+        return new Pawn(board, i, j, _p.color);
       default:
-        break;
+        return null;
     }
   }
 }

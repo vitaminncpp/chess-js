@@ -1,29 +1,21 @@
 import { Piece } from './pieces';
-import Config from './chess.config';
 import { Move } from './move';
-import { IBoard } from './chess.types';
+import { IBoard, IPosition, IType } from './chess.types';
 
 export class Chessboard {
   board: Tile[][] = [];
 
-  constructor(board?: IBoard) {
+  constructor(board: IBoard) {
     this.board = [];
 
     board?.forEach((rank, i) => {
       this.board.push([]);
       rank.forEach((_p, j) => {
         if (_p) {
-          // this.board[i].push(new Tile(Piece.create(_p)));
-          this.board[i].push(new Tile());
+          this.board[i].push(new Tile(Piece.create(_p, this, i as IPosition, j as IPosition)));
         }
       });
     });
-    for (let i = 0; i < Config.BOARD.SIZE; i++) {
-      this.board.push([]);
-      for (let j = 0; j < Config.BOARD.SIZE; j++) {
-        this.board[i].push(new Tile());
-      }
-    }
     this.update();
   }
 
@@ -43,12 +35,20 @@ export class Chessboard {
     });
     return true;
   }
+
+  getPosition(): IBoard {
+    return this.board.map((rank: Tile[]) =>
+      rank.map((tile: Tile) =>
+        tile.piece ? { color: tile.piece.getColor(), piece: tile.piece.getType() as IType } : null,
+      ),
+    );
+  }
 }
 
 export class Tile {
   piece: Piece | null;
 
-  constructor(piece?: Piece) {
-    this.piece = null;
+  constructor(piece: Piece | null) {
+    this.piece = piece;
   }
 }

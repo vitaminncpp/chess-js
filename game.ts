@@ -13,7 +13,7 @@ export class Game {
   state: State = new State();
 
   constructor(board?: IBoard) {
-    this.board = new Chessboard();
+    this.board = new Chessboard(board || Config.INITIAL_POS);
     this.playerW = new Player(this.board, true);
     this.playerB = new Player(this.board, false);
     this.playerW.setOpponent(this.playerB);
@@ -45,16 +45,10 @@ export class Game {
     if (this.state.turn === color) {
       return this.board.board[x][y].piece!.getMoveMap();
     }
-    return Config.empty.map((_u) => _u.map((_v) => !!_v));
+    return Config.BOARD.EMPTY;
   }
 
-  loadBoard(board: IBoard) {}
-
   getPosition(): IBoard {
-    return this.board.board.map((rank: Tile[]) =>
-      rank.map((tile: Tile) =>
-        tile.piece ? { color: tile.piece.getColor(), piece: tile.piece.getType() as IType } : null,
-      ),
-    );
+    return this.board.getPosition();
   }
 }
