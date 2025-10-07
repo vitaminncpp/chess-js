@@ -3,7 +3,7 @@ import { Player } from './players';
 import { State } from './state';
 import { Move } from './move';
 import Config from './chess.config';
-import { MoveType } from './games.enum';
+import { MoveType, PLAYER } from './games.enum';
 import { IBoard, IType } from './chess.types';
 
 export class Game {
@@ -12,12 +12,17 @@ export class Game {
   playerB: Player;
   state: State = new State();
 
-  constructor(board?: IBoard) {
+  constructor(board?: IBoard, turn?: PLAYER) {
     this.board = new Chessboard(board || Config.INITIAL_POS);
     this.playerW = new Player(this.board, true);
     this.playerB = new Player(this.board, false);
     this.playerW.setOpponent(this.playerB);
     this.playerB.setOpponent(this.playerW);
+    this.state.turn = turn
+      ? turn === PLAYER.BLACK
+        ? Config.COLOR.BLACK
+        : Config.COLOR.WHITE
+      : Config.COLOR.WHITE;
     this.update();
   }
 

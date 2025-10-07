@@ -25,7 +25,7 @@ export abstract class Piece {
     this.x = x;
     this.y = y;
     this.color = color;
-    this.board.board[x]![y]!.piece = this;
+    // this.board.board[x][y].piece = this;
     this.init();
   }
 

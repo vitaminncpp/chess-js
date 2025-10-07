@@ -11,9 +11,9 @@ export class Chessboard {
     board?.forEach((rank, i) => {
       this.board.push([]);
       rank.forEach((_p, j) => {
-        if (_p) {
-          this.board[i].push(new Tile(Piece.create(_p, this, i as IPosition, j as IPosition)));
-        }
+        this.board[i].push(
+          new Tile(_p ? Piece.create(_p, this, i as IPosition, j as IPosition) : null),
+        );
       });
     });
     this.update();

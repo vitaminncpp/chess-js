@@ -33,7 +33,7 @@ export enum GamePiece {
   KING = 'KING',
 }
 
-export enum Player {
+export enum PLAYER {
   WHITE = 'WHITE',
   BLACK = 'BLACK',
 }
