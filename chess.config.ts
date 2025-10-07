@@ -1,5 +1,5 @@
-import { FILE } from "./games.enum";
-import { IBoard, IType } from "./chess.types";
+import { FILE } from './games.enum';
+import { IBoard, IType } from './chess.types';
 
 export const COLOR = { WHITE: true, BLACK: false } as const;
 export const PIECE = {
@@ -19,7 +19,7 @@ export const BOARD = {
   EMPTY: Array(8).fill(Array(8).fill(false)),
 };
 
-export const FILES = ["a", "b", "c", "d", "e", "f", "g", "h"] as const;
+export const FILES = Object.values(FILE);
 
 const Config = {
   PIECE,
