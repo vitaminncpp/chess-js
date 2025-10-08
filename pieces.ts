@@ -142,9 +142,9 @@ export abstract class Piece {
       case Config.PIECE.ROOK.type:
         return new Rook(board, i, j, _p.color);
       case Config.PIECE.QUEEN.type:
-        return new Pawn(board, i, j, _p.color);
+        return new Queen(board, i, j, _p.color);
       case Config.PIECE.KING.type:
-        return new Pawn(board, i, j, _p.color);
+        return new King(board, i, j, _p.color);
       default:
         return null;
     }
