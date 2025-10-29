@@ -39,7 +39,7 @@ export class Chessboard {
   getPosition(): IBoard {
     return this.board.map((rank: Tile[]) =>
       rank.map((tile: Tile) =>
-        tile.piece ? { color: tile.piece.getColor(), piece: tile.piece.getType() as IType } : null,
+        tile.piece ? { color: tile.piece.getColor(), piece: tile.piece.getType() } : null,
       ),
     );
   }

@@ -17,7 +17,7 @@ export const PIECE = {
 export const BOARD = {
   SIZE: 8,
   TILE_PX: 50,
-  EMPTY: Array(8).fill(Array(8).fill(false)),
+  EMPTY: Array<boolean[]>(8).fill(Array<boolean>(8).fill(false)),
 };
 
 export const FILES = Object.values(FILE);
