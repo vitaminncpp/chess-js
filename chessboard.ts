@@ -1,6 +1,6 @@
-import { Piece } from './pieces';
-import { Move } from './move';
-import { IBoard, IPosition, IType } from './chess.types';
+import { Piece } from "./pieces";
+import { Move } from "./move";
+import { IBoard, IPosition, IType } from "./chess.types";
 
 export class Chessboard {
   board: Tile[][] = [];

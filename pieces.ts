@@ -1,9 +1,9 @@
-import { Chessboard } from './chessboard';
-import { Player } from './players';
-import type { IPiece, IPosition, IType, IValue } from './chess.types';
-import Config from './chess.config';
-import { Move } from './move';
-import { MoveType } from './games.enum';
+import { Chessboard } from "./chessboard";
+import { Player } from "./players";
+import type { IPiece, IPosition, IType, IValue } from "./chess.types";
+import Config from "./chess.config";
+import { Move } from "./move";
+import { MoveType } from "./games.enum";
 
 export abstract class Piece {
   protected x: IPosition = -1;

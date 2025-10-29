@@ -1,5 +1,6 @@
-import { FILE } from './games.enum';
-import { IBoard, IType } from './chess.types';
+import { FILE } from "./games.enum";
+import { IBoard, IPiece, IType } from "./chess.types";
+import { Piece } from "./pieces";
 
 export const COLOR = { WHITE: true, BLACK: false } as const;
 export const PIECE = {
@@ -27,55 +28,55 @@ const Config = {
   BOARD,
   INITIAL_POS: createInitialPosition(),
   fileToIndex: (file: FILE) => FILES.indexOf(file),
-  indexToFile: (i: number) => FILES[i] as FILE,
+  indexToFile: (i: number) => FILES[i] satisfies FILE,
 };
 
 function createInitialPosition(): IBoard {
   return [
     [
-      { color: COLOR.WHITE, piece: PIECE.ROOK.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.KNIGHT.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.BISHOP.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.QUEEN.type as IType },
+      { color: COLOR.WHITE, piece: PIECE.ROOK.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.KNIGHT.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.BISHOP.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.QUEEN.type satisfies IType },
 
-      { color: COLOR.WHITE, piece: PIECE.KING.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.BISHOP.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.KNIGHT.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.ROOK.type as IType },
+      { color: COLOR.WHITE, piece: PIECE.KING.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.BISHOP.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.KNIGHT.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.ROOK.type satisfies IType },
     ],
     [
-      { color: COLOR.WHITE, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.WHITE, piece: PIECE.PAWN.type as IType },
+      { color: COLOR.WHITE, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.WHITE, piece: PIECE.PAWN.type satisfies IType },
     ],
-    ...Array(4).fill(Array(8).fill(null)),
+    ...Array<Array<IPiece | null>>(4).fill(Array<IPiece | null>(8).fill(null)),
     [
-      { color: COLOR.BLACK, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.PAWN.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.PAWN.type as IType },
+      { color: COLOR.BLACK, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.PAWN.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.PAWN.type satisfies IType },
     ],
     [
-      { color: COLOR.BLACK, piece: PIECE.ROOK.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.KNIGHT.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.BISHOP.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.QUEEN.type as IType },
+      { color: COLOR.BLACK, piece: PIECE.ROOK.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.KNIGHT.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.BISHOP.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.QUEEN.type satisfies IType },
 
-      { color: COLOR.BLACK, piece: PIECE.KING.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.BISHOP.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.KNIGHT.type as IType },
-      { color: COLOR.BLACK, piece: PIECE.ROOK.type as IType },
+      { color: COLOR.BLACK, piece: PIECE.KING.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.BISHOP.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.KNIGHT.type satisfies IType },
+      { color: COLOR.BLACK, piece: PIECE.ROOK.type satisfies IType },
     ],
-  ];
+  ] satisfies IBoard;
 }
 
 export default Config;

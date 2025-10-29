@@ -1,5 +1,5 @@
-import type { IPosition } from './chess.types';
-import { MoveType } from './games.enum';
+import type { IPosition } from "./chess.types";
+import { MoveType } from "./games.enum";
 
 export class Move {
   xSrc: IPosition = -1;
