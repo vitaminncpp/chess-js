@@ -1,6 +1,5 @@
 import { FILE } from "./games.enum";
 import { IBoard, IPiece, IType } from "./chess.types";
-import { Piece } from "./pieces";
 
 export const COLOR = { WHITE: true, BLACK: false } as const;
 export const PIECE = {
