@@ -10,4 +10,5 @@ export interface IPiece {
   r?: IPosition;
   f?: FILE;
 }
+
 export type IBoard = Array<Array<IPiece | null>>;
